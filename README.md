@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌱♻️ EcoAbono — Máquina Semiautomática de Bajo Costo para Transformar Residuos Orgánicos en Fertilizante Natural 🌿
+# 🌱♻️ Fertilízate — Máquina Semiautomática de Bajo Costo para Transformar Residuos Orgánicos en Fertilizante Natural 🌿
 
 **Del plato a la huerta: convierte tus residuos de cocina y jardín en abono, sin vertederos y sin gastar de más.**
 
@@ -10,12 +10,12 @@
 [![Simulación](https://img.shields.io/badge/simulaci%C3%B3n-Tinkercad%20%2F%20CAD-orange?style=for-the-badge)](#-simulación-y-modelado)
 [![Impacto](https://img.shields.io/badge/impacto-ambiental%20%2B%20educativo-success?style=for-the-badge)](#-impacto-ambiental-y-económico)
 [![PRs](https://img.shields.io/badge/PRs-bienvenidos-ff69b4?style=for-the-badge)](#-contribuir)
-[![CI](https://github.com/TU-USUARIO/ecoabono/actions/workflows/ci.yml/badge.svg)](https://github.com/TU-USUARIO/ecoabono/actions/workflows/ci.yml)
-[![Sitio web](https://img.shields.io/badge/sitio%20web-GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white)](https://TU-USUARIO.github.io/ecoabono/)
+[![CI](https://github.com/TU-USUARIO/fertilizate/actions/workflows/ci.yml/badge.svg)](https://github.com/TU-USUARIO/fertilizate/actions/workflows/ci.yml)
+[![Sitio web](https://img.shields.io/badge/sitio%20web-GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white)](https://TU-USUARIO.github.io/fertilizate/)
 
 *Proyecto académico · Escala doméstica · Open Source*
 
-🌐 **[Ver sitio web](https://TU-USUARIO.github.io/ecoabono/)** · 📘 [Cómo publicar este repositorio](./docs/PUBLICAR.md)
+🌐 **[Ver sitio web](https://TU-USUARIO.github.io/fertilizate/)** · 📘 [Cómo publicar este repositorio](./docs/PUBLICAR.md)
 
 </div>
 
@@ -44,7 +44,7 @@
 
 ## 📖 Resumen del Proyecto
 
-**EcoAbono** es el diseño y construcción de una **máquina semiautomática de bajo costo** que recibe residuos orgánicos domésticos (cáscaras de frutas, restos de verduras, hojas) y los **tritura, mezcla, airea y monitorea** para acelerar su transformación en **fertilizante natural**.
+**Fertilízate** es el diseño y construcción de una **máquina semiautomática de bajo costo** que recibe residuos orgánicos domésticos (cáscaras de frutas, restos de verduras, hojas) y los **tritura, mezcla, airea y monitorea** para acelerar su transformación en **fertilizante natural**.
 
 Está pensada para tres tipos de usuarios:
 
@@ -55,7 +55,7 @@ Está pensada para tres tipos de usuarios:
 | 🏫 **Huerta de los Sueños** (nuestra institución educativa) | Producir fertilizante para la huerta escolar y usarlo como herramienta pedagógica |
 
 > [!NOTE]
-> **¿Qué hace diferente a EcoAbono?** No intenta ser una máquina industrial. Es un prototipo **abierto, reproducible y económico**, que combina componentes accesibles (motor, tambor, sensores y un microcontrolador) con una operación **semiautomática**: la persona carga y supervisa; la máquina tritura, mezcla, airea y controla.
+> **¿Qué hace diferente a Fertilízate?** No intenta ser una máquina industrial. Es un prototipo **abierto, reproducible y económico**, que combina componentes accesibles (motor, tambor, sensores y un microcontrolador) con una operación **semiautomática**: la persona carga y supervisa; la máquina tritura, mezcla, airea y controla.
 
 ---
 
@@ -176,7 +176,7 @@ flowchart TD
 | LEDs + buzzer | Alertas |
 | Fuente de alimentación adecuada al motor | Alimentación |
 
-**Código real del firmware:** [`firmware/ecoabono/ecoabono.ino`](./firmware/ecoabono/ecoabono.ino) · pruebas en [`firmware/pruebas/`](./firmware/pruebas) · librerías y pines en [`LIBRERIAS.md`](./firmware/LIBRERIAS.md)
+**Código real del firmware:** [`firmware/fertilizate/fertilizate.ino`](./firmware/fertilizate/fertilizate.ino) · pruebas en [`firmware/pruebas/`](./firmware/pruebas) · librerías y pines en [`LIBRERIAS.md`](./firmware/LIBRERIAS.md)
 
 **Pseudocódigo de la lógica de control**
 
@@ -304,7 +304,7 @@ sequenceDiagram
 
 > Tabla de referencia cualitativa. Completa las celdas marcadas con **📏** con tus mediciones reales en la sección de [Métricas](#-métricas-y-resultados).
 
-| Criterio | 🤖 **EcoAbono (máquina)** | 🍂 **Compostaje tradicional** | 🛍️ **Abono comercial** |
+| Criterio | 🤖 **Fertilízate (máquina)** | 🍂 **Compostaje tradicional** | 🛍️ **Abono comercial** |
 |---|---|---|---|
 | **Costo inicial** | Medio-bajo (construcción única) | Muy bajo | Nulo |
 | **Costo recurrente** | Muy bajo (energía) | Casi nulo | Alto (compra continua) |
@@ -323,7 +323,7 @@ sequenceDiagram
 
 <br/>
 
-- **Máquina EcoAbono:** hogares o instituciones con generación constante de residuos que quieren reducir esfuerzo manual y aprender del proceso.
+- **Máquina Fertilízate:** hogares o instituciones con generación constante de residuos que quieren reducir esfuerzo manual y aprender del proceso.
 - **Compostaje tradicional:** quienes tienen espacio, tiempo y no requieren velocidad.
 - **Abono comercial:** cuando se necesita una formulación nutricional específica y exacta, o no hay capacidad de producción propia.
 
@@ -484,8 +484,8 @@ python scripts/punto_equilibrio.py --inversion 0 --kg-mes 0 --precio-kg 0 --cost
 - [ ] Clonar el repositorio:
 
 ```bash
-git clone https://github.com/TU-USUARIO/ecoabono.git
-cd ecoabono
+git clone https://github.com/TU-USUARIO/fertilizate.git
+cd fertilizate
 ```
 
 ### 🏗️ Fase 1 — Estructura mecánica
@@ -511,7 +511,7 @@ cd ecoabono
 - [ ] Instalar el [Arduino IDE](https://www.arduino.cc/en/software).
 - [ ] Instalar las librerías indicadas en `firmware/LIBRERIAS.md`.
 - [ ] Calibrar el sensor de humedad (valor en aire y en agua).
-- [ ] Cargar `firmware/ecoabono/ecoabono.ino`.
+- [ ] Cargar `firmware/fertilizate/fertilizate.ino`.
 - [ ] Verificar por monitor serie que las lecturas son coherentes.
 - [ ] Probar que **abrir la tapa detiene los motores**.
 
@@ -593,7 +593,7 @@ python simulacion/modelo_proceso/simulacion_basica.py --masa 5 --tasa 0.04 --dia
 </div>
 
 > [!NOTE]
-> **Contexto:** la *Huerta de los Sueños* es un espacio educativo de la institución donde la comunidad cultiva y aprende sobre sostenibilidad. EcoAbono se integra como la pieza que cierra el ciclo: **los residuos del comedor y la huerta se convierten en el abono de la huerta**.
+> **Contexto:** la *Huerta de los Sueños* es un espacio educativo de la institución donde la comunidad cultiva y aprende sobre sostenibilidad. Fertilízate se integra como la pieza que cierra el ciclo: **los residuos del comedor y la huerta se convierten en el abono de la huerta**.
 
 ### 🔁 Ciclo cerrado propuesto
 
@@ -601,7 +601,7 @@ python simulacion/modelo_proceso/simulacion_basica.py --masa 5 --tasa 0.04 --dia
 flowchart LR
     A["🍽️ Restos de cocina<br/>y comedor escolar"] --> M
     B["🍂 Hojas y poda<br/>de la huerta"] --> M
-    M["🤖 EcoAbono"] --> C["🌱 Abono natural"]
+    M["🤖 Fertilízate"] --> C["🌱 Abono natural"]
     C --> D["🌻 Huerta de los Sueños"]
     D --> E["🥕🥬 Cosecha y<br/>aprendizaje"]
     E --> A
@@ -626,7 +626,7 @@ flowchart LR
 | Grupo | Tratamiento | Qué medir |
 |---|---|---|
 | 🅰️ Control | Sin abono | Germinación, altura, número de hojas, rendimiento |
-| 🅱️ EcoAbono | Abono producido por la máquina | Ídem |
+| 🅱️ Fertilízate | Abono producido por la máquina | Ídem |
 | 🅲 Comercial *(opcional)* | Abono orgánico comercial | Ídem |
 
 > [!TIP]
@@ -639,7 +639,7 @@ flowchart LR
 | Residuos orgánicos procesados en el periodo | `___ kg` |
 | Abono producido | `___ kg` |
 | Estudiantes y docentes involucrados | `___` |
-| Diferencia de crecimiento (EcoAbono vs. control) | `___ %` |
+| Diferencia de crecimiento (Fertilízate vs. control) | `___ %` |
 | Ahorro estimado en compra de fertilizantes | `$ ___` |
 | Aprendizajes y observaciones | `___` |
 
@@ -680,7 +680,7 @@ flowchart LR
 ## 📂 Estructura del Repositorio
 
 ```text
-ecoabono/
+fertilizate/
 ├── 📄 README.md                  # Este documento
 ├── 📄 LICENSE                    # Licencia MIT
 ├── 📄 CONTRIBUTING.md            # Guía para contribuir
@@ -704,7 +704,7 @@ ecoabono/
 │   ├── esquema_electrico/        # Esquemas y diagramas de conexión
 │   └── BOM.md                    # Lista de materiales detallada
 ├── 📁 firmware/
-│   ├── ecoabono/ecoabono.ino     # Programa principal (Arduino)
+│   ├── fertilizate/fertilizate.ino     # Programa principal (Arduino)
 │   ├── pruebas/                  # Sketches de prueba por componente
 │   └── LIBRERIAS.md
 ├── 📁 simulacion/

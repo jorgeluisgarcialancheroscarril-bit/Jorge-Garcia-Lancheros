@@ -1,6 +1,6 @@
 # Código de conducta
 
-EcoAbono es un proyecto educativo abierto. Para que sea un espacio seguro y acogedor:
+Fertilízate es un proyecto educativo abierto. Para que sea un espacio seguro y acogedor:
 
 - Trata a todas las personas con respeto, sin importar edad, género, origen o nivel de experiencia.
 - Da y recibe críticas de forma constructiva; critica las ideas, no a las personas.

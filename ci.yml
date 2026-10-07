@@ -31,7 +31,7 @@ jobs:
         with:
           fqbn: arduino:avr:uno
           sketch-paths: |
-            - firmware/ecoabono
+            - firmware/fertilizate
             - firmware/pruebas/test_lcd
             - firmware/pruebas/test_sensores
             - firmware/pruebas/test_reles

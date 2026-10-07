@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Resultados generados
+data/resumen_rendimiento.csv
+simulacion/modelo_proceso/reduccion_masa.png
+
+# Arduino / editores
+build/
+*.hex
+*.elf
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Sitio generado por el workflow
+_site/

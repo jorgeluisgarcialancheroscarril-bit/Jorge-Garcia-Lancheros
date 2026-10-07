@@ -1,8 +1,8 @@
-# 🚀 Cómo publicar EcoAbono en GitHub (repositorio + sitio web)
+# 🚀 Cómo publicar Fertilízate en GitHub (repositorio + sitio web)
 
 Al terminar tendrás:
 - el repositorio con el README interactivo (Mermaid, alertas, desplegables), y
-- una **página web** en `https://TU-USUARIO.github.io/ecoabono/` generada automáticamente desde el README.
+- una **página web interactiva** (juegos, quiz y calculadora; la documentación completa queda en `/documentacion.html`) en `https://TU-USUARIO.github.io/fertilizate/` generada automáticamente desde el README.
 
 ## 1. Personaliza antes de subir
 - [ ] Reemplaza `TU-USUARIO` por tu usuario u organización de GitHub en: `README.md`, `CITATION.cff` y (si lo cambias) el nombre del repo.
@@ -11,15 +11,15 @@ Al terminar tendrás:
 - [ ] Rellena los `___` del README con tus datos reales.
 
 ## 2. Crear el repositorio y subir los archivos
-1. En GitHub: **New repository** → nombre `ecoabono` → público → **sin** README, .gitignore ni licencia (ya vienen incluidos).
+1. En GitHub: **New repository** → nombre `fertilizate` → público → **sin** README, .gitignore ni licencia (ya vienen incluidos).
 2. En la carpeta del proyecto:
 
 ```bash
 git init
 git add .
-git commit -m "feat: primera versión de EcoAbono"
+git commit -m "feat: primera versión de Fertilízate"
 git branch -M main
-git remote add origin https://github.com/TU-USUARIO/ecoabono.git
+git remote add origin https://github.com/TU-USUARIO/fertilizate.git
 git push -u origin main
 ```
 
@@ -29,7 +29,7 @@ git push -u origin main
 1. Repositorio → **Settings → Pages**.
 2. En **Build and deployment → Source** elige **GitHub Actions**.
 3. Ve a la pestaña **Actions**: el workflow *Publicar sitio (GitHub Pages)* se ejecuta solo con cada `push` a `main` (o ejecútalo con **Run workflow**).
-4. Cuando termine en verde, tu sitio estará en `https://TU-USUARIO.github.io/ecoabono/`.
+4. Cuando termine en verde, tu sitio estará en `https://TU-USUARIO.github.io/fertilizate/`.
 
 ## 4. Comprobar que todo funciona
 - [ ] El README se ve bien en GitHub: los 3 diagramas Mermaid se dibujan, las alertas tienen color y los `<details>` se despliegan.

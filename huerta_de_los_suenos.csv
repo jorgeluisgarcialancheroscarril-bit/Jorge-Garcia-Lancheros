@@ -1,0 +1,4 @@
+fecha,grupo,especie,tratamiento,germinacion_pct,altura_cm,num_hojas,observaciones
+AAAA-MM-DD,control,,sin abono,,,,
+AAAA-MM-DD,fertilizate,,abono Fertilízate,,,,
+AAAA-MM-DD,comercial,,abono comercial,,,,

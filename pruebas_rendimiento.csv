@@ -1,0 +1,4 @@
+prueba,fecha,tipo_residuo,masa_entrada_kg,masa_no_procesada_kg,tiempo_ciclo_min,energia_Wh,observaciones
+1,AAAA-MM-DD,frutas+verduras,0,0,0,0,
+2,AAAA-MM-DD,hojas+verduras,0,0,0,0,
+3,AAAA-MM-DD,mixto,0,0,0,0,

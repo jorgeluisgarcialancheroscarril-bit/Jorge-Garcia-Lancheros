@@ -1,169 +1,195 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EcoAbono · Máquina semiautomática de compostaje</title>
-<meta name="description" content="Máquina semiautomática de bajo costo para transformar residuos orgánicos en fertilizante natural. Proyecto académico open source.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fertilízate 🌱 Del plato a la huerta</title>
+<meta name="description" content="Máquina semiautomática de bajo costo que convierte residuos orgánicos en fertilizante natural. Proyecto académico open source.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#f6faf6; --card:#ffffff; --txt:#1c2a1f; --muted:#5b6b5e; --line:#d9e5da;
-    --accent:#2e7d32; --accent-soft:#e8f5e9; --code:#f1f5f1;
-    --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --caut:#cf222e;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#0f1712; --card:#16211a; --txt:#e3ece5; --muted:#9db0a1; --line:#2a3b2f;
-      --accent:#66bb6a; --accent-soft:#1b2b1f; --code:#1d2b21;
-      --note:#58a6ff; --tip:#3fb950; --imp:#a371f7; --warn:#d29922; --caut:#f85149;
-    }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:70px}
-  body{margin:0;background:var(--bg);color:var(--txt);
-       font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-       padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-  header.top{position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center;justify-content:space-between;
-       padding:10px 18px;background:var(--card);border-bottom:1px solid var(--line)}
-  header.top strong{font-size:1.05rem}
-  header.top a{color:var(--accent);text-decoration:none;font-weight:600;border:1px solid var(--accent);
-       padding:5px 12px;border-radius:999px;font-size:.9rem;white-space:nowrap}
-  header.top a:hover{background:var(--accent-soft)}
-  main{max-width:980px;margin:24px auto;padding:0 16px}
-  #contenido{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 30px;overflow-wrap:anywhere}
-  #estado{color:var(--muted);text-align:center;padding:40px 0}
-  h1,h2,h3,h4{line-height:1.25}
-  h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
-  a{color:var(--accent)}
-  img{max-width:100%}
-  hr{border:0;border-top:1px solid var(--line);margin:2em 0}
-  code{background:var(--code);padding:.15em .4em;border-radius:5px;font-size:.9em}
-  pre{background:var(--code);padding:14px 16px;border-radius:10px;overflow-x:auto}
-  pre code{background:none;padding:0}
-  pre.mermaid{background:transparent;text-align:center;overflow-x:auto}
-  .tabla{overflow-x:auto;margin:1em 0}
-  table{border-collapse:collapse;width:100%;font-size:.93rem}
-  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top}
-  th{background:var(--accent-soft)}
-  tr:nth-child(even) td{background:color-mix(in srgb,var(--accent-soft) 35%,transparent)}
-  details{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:1em 0;background:var(--bg)}
-  details[open]{background:transparent}
-  summary{cursor:pointer;font-weight:600}
-  blockquote{margin:1em 0;padding:.4em 1em;border-left:4px solid var(--line);color:var(--muted)}
-  blockquote.alerta{color:var(--txt);border-left-color:var(--c);background:color-mix(in srgb,var(--c) 8%,transparent);border-radius:0 8px 8px 0}
-  blockquote.alerta .t{font-weight:700;color:var(--c);margin:0 0 .2em}
-  .a-note{--c:var(--note)} .a-tip{--c:var(--tip)} .a-important{--c:var(--imp)}
-  .a-warning{--c:var(--warn)} .a-caution{--c:var(--caut)}
-  input[type=checkbox]{margin-right:.4em}
-  footer{max-width:980px;margin:0 auto 40px;padding:0 16px;color:var(--muted);font-size:.85rem;text-align:center}
-  @media (max-width:600px){#contenido{padding:18px 14px}}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-</head>
+:root{--w:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0V5Q12.5 12 25 5T50 5T75 5T100 5V0Z'/%3E%3C/svg%3E")}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;font:17px/1.6 Nunito,system-ui,sans-serif;color:#1d2b24;overflow-x:hidden}
+h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif;line-height:1.1;margin:0 0 .4em}
+h2{font-size:clamp(2rem,5vw,3rem)}
+nav{position:sticky;top:0;z-index:50;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:8px;background:#fffe;backdrop-filter:blur(8px);box-shadow:0 2px 12px #0002}
+nav a{padding:4px 13px;border-radius:99px;color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;background:var(--c);transition:.15s}
+nav a:hover{transform:translateY(-2px) rotate(-3deg)}
+.sec{position:relative;padding:92px 18px 70px}
+.sec::before{content:"";position:absolute;top:-1px;left:0;right:0;height:46px;background:var(--prev);-webkit-mask:var(--w) repeat-x;mask:var(--w) repeat-x;-webkit-mask-size:200px 100%;mask-size:200px 100%}
+.in{max-width:1000px;margin:auto;position:relative}
+.sub{font-size:1.1rem;max-width:660px;margin-bottom:26px}
+.hero{background:linear-gradient(180deg,#2e9e4f,#6cc24a 65%,#9ad64a);color:#fff;text-align:center;padding:64px 18px 110px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(3.4rem,13vw,7.5rem);text-shadow:0 5px 0 #1b4332;margin:0}
+.hero p{font-size:1.3rem;font-weight:700;text-shadow:0 2px 0 #0003;max-width:620px;margin:8px auto 18px}
+.fl{position:absolute;font-size:2.2rem;opacity:.85;animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-26px) rotate(14deg)}}
+.btn{display:inline-block;margin:6px;padding:11px 22px;border-radius:99px;font:800 1rem 'Baloo 2',sans-serif;text-decoration:none;color:#fff;background:var(--c);box-shadow:0 5px 0 #0004;border:0;cursor:pointer;transition:.15s}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 #0004}
+.chips span{display:inline-block;margin:4px;padding:6px 14px;border-radius:99px;background:#fff;color:#1b4332;font-weight:800;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px}
+.card{background:#fff;border-radius:22px;padding:20px;box-shadow:0 6px 0 #0002;border:3px solid var(--c)}
+.card h3{color:var(--c)}
+.flip{perspective:800px;height:215px;cursor:pointer}
+.flip>div{position:relative;height:100%;transition:.6s;transform-style:preserve-3d}
+.flip.on>div{transform:rotateY(180deg)}
+.f,.bk{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:3px solid var(--c);box-shadow:0 6px 0 #0002}
+.f{background:#fff;font:800 1.2rem 'Baloo 2'}.f b{font-size:3.4rem}.f small{font:400 .8rem Nunito;color:#777}
+.bk{background:var(--c);color:#fff;transform:rotateY(180deg);font-size:.95rem}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.steps button{flex:1;min-width:96px;padding:9px 6px;border:0;border-bottom:5px solid var(--c);border-radius:16px;background:#fff;font:800 .9rem 'Baloo 2';cursor:pointer;box-shadow:0 4px 0 #0002}
+.steps button.on{background:var(--c);color:#fff;transform:translateY(-3px)}
+.panel{background:#fff;border-radius:24px;padding:24px;display:flex;gap:22px;align-items:center;box-shadow:0 6px 0 #0002;min-height:170px;flex-wrap:wrap}
+.em{font-size:5rem;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) scale(1.07)}}
+.tag{display:inline-block;padding:2px 12px;border-radius:99px;color:#fff;font-weight:800;font-size:.8rem;background:var(--c)}
+.bar{height:14px;background:#fff9;border-radius:9px;overflow:hidden;margin:14px 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#06d6a0,#ffd93d,#ff8c42,#f15bb5);transition:width .4s}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.big{font-size:5rem;text-align:center;line-height:1.2}
+.fb{min-height:54px;font-weight:700;text-align:center}
+.ctr{text-align:center}
+input[type=range]{width:100%;accent-color:var(--c)}
+.num{font:800 2.4rem 'Baloo 2';color:var(--c);line-height:1}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px;text-align:center}
+.out div{background:#f6f0ff;border-radius:16px;padding:10px}
+.out small{display:block;color:#555}
+.gauge{height:22px;border-radius:12px;background:linear-gradient(90deg,#ff8c42 0 50%,#06d6a0 50% 60%,#4cc9f0 60%);position:relative;margin:14px 0}
+.gauge i{position:absolute;top:-6px;width:8px;height:34px;background:#1b4332;border-radius:5px;transition:left .15s}
+.opt{display:block;width:100%;margin:6px 0;padding:11px;border-radius:14px;border:3px solid #ddd;background:#fff;font:700 1rem Nunito;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--c)}.opt.ok{background:#b9f6ca;border-color:#06d6a0}.opt.no{background:#ffcdd2;border-color:#f44336}
+.chk label{display:flex;gap:10px;align-items:center;padding:9px 12px;margin:6px 0;border-radius:14px;background:#fff;cursor:pointer;font-weight:700;box-shadow:0 3px 0 #0001}
+.chk input{width:22px;height:22px;accent-color:#f15bb5}
+.chk label.d{text-decoration:line-through;opacity:.6}
+.loop{font-size:2.2rem;text-align:center;margin:10px 0;letter-spacing:4px}
+.loop span{display:inline-block;animation:bob 2s ease-in-out infinite}
+footer.sec{background:#1b4332;color:#fff;text-align:center}
+.cf{position:fixed;top:-40px;z-index:99;pointer-events:none;animation:cf var(--d) ease-in forwards}
+@keyframes cf{to{transform:translateY(105vh) rotate(var(--r))}}
+.rv{opacity:0;transform:translateY(30px);transition:.7s}.rv.show{opacity:1;transform:none}
+</style><noscript><style>.rv{opacity:1;transform:none}</style></noscript></head>
 <body>
-<header class="top">
-  <strong>🌱 EcoAbono</strong>
-  <a id="btn-repo" href="#" rel="noopener">Ver repositorio en GitHub ↗</a>
+<nav>
+<a href="#problema" style="--c:#e0a800">Problema</a><a href="#como" style="--c:#1ea7d6">¿Cómo funciona?</a><a href="#juego" style="--c:#ff7a2f">Juega</a><a href="#impacto" style="--c:#9b5de5">Impacto</a><a href="#quiz" style="--c:#0bb78a">Quiz</a><a href="#replica" style="--c:#e0409c">Réplica</a>
+</nav>
+
+<header class="hero" id="inicio">
+<h1>Fertilízate</h1>
+<p>De tus restos de cocina a abono para la huerta 🌱 con una máquina semiautomática de bajo costo.</p>
+<a class="btn" style="--c:#ff7a2f" href="#juego">🎮 ¡Jugar ahora!</a><a class="btn" style="--c:#9b5de5" href="documentacion.html">📘 Documentación</a><a class="btn" style="--c:#1b4332" id="gh" href="#">🐙 GitHub</a>
+<div class="chips"><span>♻️ Residuos → abono</span><span>💸 Bajo costo</span><span>🔓 Open source</span><span>🏫 Huerta de los Sueños</span></div>
 </header>
-<main>
-  <div id="estado">Cargando documentación…</div>
-  <article id="contenido" hidden></article>
-</main>
-<footer>Página generada automáticamente desde el <code>README.md</code> del repositorio · Licencia MIT</footer>
+
+<section class="sec" id="problema" style="background:#fff4c2;--prev:#9ad64a"><div class="in">
+<h2 class="rv">😱 ¿Cuál es el problema?</h2>
+<p class="sub rv">Los residuos orgánicos del hogar terminan en vertederos. Allí se descomponen sin aire y pasan cosas feas. <b>¡Toca cada tarjeta para voltearla!</b></p>
+<div class="grid rv" id="flips"></div>
+</div></section>
+
+<section class="sec" id="como" style="background:#d8f1ff;--prev:#fff4c2"><div class="in">
+<h2 class="rv">⚙️ ¿Cómo funciona?</h2>
+<p class="sub rv">Es <b>semiautomática</b>: tú cargas y supervisas, la máquina tritura, mezcla, airea y mide.</p>
+<div class="steps rv" id="steps"></div>
+<div class="panel rv" id="panel"></div>
+<div class="bar"><i id="prog"></i></div>
+<button class="btn" style="--c:#1ea7d6" id="play">▶ Reproducir ciclo</button>
+<h3 style="margin-top:34px">⚖️ ¿Y frente a otras opciones?</h3>
+<div class="grid rv">
+<div class="card" style="--c:#2e9e4f"><h3>🤖 Fertilízate</h3>Sensores y alertas, menos esfuerzo y fase activa más corta. Costo único de construcción.</div>
+<div class="card" style="--c:#e0a800"><h3>🍂 Compostaje tradicional</h3>Casi gratis, pero pide mucho volteo, espacio y paciencia.</div>
+<div class="card" style="--c:#e0409c"><h3>🛍️ Abono comercial</h3>Cómodo, pero es un gasto continuo y no reduce tus residuos.</div>
+</div></div></section>
+
+<section class="sec" id="juego" style="background:#ffe5d2;--prev:#d8f1ff"><div class="in">
+<h2 class="rv">🎮 Zona de juegos</h2>
+<p class="sub rv">Practica lo que sí y no entra a la máquina, y prueba el semáforo de humedad que usa el sensor.</p>
+<div class="two">
+<div class="card rv" style="--c:#ff7a2f"><h3>🗑️ ¿Entra o no entra?</h3>
+<div class="big" id="gi"></div><div class="ctr"><b id="gn"></b></div>
+<div class="ctr"><button class="btn" style="--c:#2e9e4f" id="yes">✅ Entra</button><button class="btn" style="--c:#e53935" id="no">🚫 No entra</button></div>
+<div class="fb" id="gf">Decide rápido…</div>
+<div class="ctr"><button class="btn" style="--c:#1ea7d6" id="nx" hidden>Siguiente ➜</button> <small id="gs"></small></div></div>
+<div class="card rv" style="--c:#1ea7d6"><h3>💧 Semáforo de humedad</h3>
+<div class="big" id="he"></div>
+<input type="range" id="hr" min="0" max="100" value="55">
+<div class="gauge"><i id="hg"></i></div>
+<div class="fb"><span class="num" id="hv" style="font-size:1.8rem"></span> <b id="ht"></b><br><span id="hd"></span></div>
+<small>Rango de referencia 50–60 %: valídalo con tus propias pruebas.</small></div>
+</div></div></section>
+
+<section class="sec" id="impacto" style="background:#eadcff;--prev:#ffe5d2"><div class="in">
+<h2 class="rv">🌍 Calculadora de impacto</h2>
+<p class="sub rv">Estima cuánto desvías del vertedero. Son simulaciones: <b>reemplaza el rendimiento con tus pesajes reales</b>.</p>
+<div class="card rv" style="--c:#9b5de5">
+<label>🍎 Residuos por semana: <b id="v1"></b> kg</label><input type="range" id="k1" min="1" max="100" value="5">
+<label>🌱 Abono obtenido (rendimiento): <b id="v2"></b> %</label><input type="range" id="k2" min="5" max="80" value="30">
+<label>🏠 Hogares que lo usan: <b id="v3"></b></label><input type="range" id="k3" min="1" max="100" value="1">
+<label>💵 Precio del abono comercial por kg: <input type="number" id="k4" min="0" value="0" style="width:110px;padding:4px"></label>
+<div class="out"><div><span class="num" id="o1">0</span><small>kg desviados / año</small></div><div><span class="num" id="o2">0</span><small>kg de abono / año</small></div><div><span class="num" id="o3">—</span><small>ahorro estimado / año</small></div></div>
+</div></div></section>
+
+<section class="sec" id="quiz" style="background:#cff7ea;--prev:#eadcff"><div class="in">
+<h2 class="rv">🧠 Mini quiz</h2>
+<div class="card rv" style="--c:#0bb78a"><h3 id="qq"></h3><div id="qo"></div><div class="fb" id="qf"></div><div class="ctr"><button class="btn" style="--c:#0bb78a" id="qn" hidden>Siguiente ➜</button></div></div>
+</div></section>
+
+<section class="sec" id="replica" style="background:#ffdcec;--prev:#cff7ea"><div class="in">
+<h2 class="rv">🛠️ Hazlo tú mismo</h2>
+<div class="loop" id="loop"></div>
+<p class="sub rv ctr" style="margin:auto auto 22px">🌻 <b>Huerta de los Sueños:</b> los restos del comedor y las hojas de la huerta vuelven a ella como abono. ¡Ciclo cerrado!</p>
+<div class="bar"><i id="cp"></i></div><div class="ctr"><b id="ct"></b></div>
+<div class="chk rv" id="chk"></div>
+<p class="ctr">⚠️ Hay cuchillas y electricidad: construye siempre con supervisión de un adulto.</p>
+</div></section>
+
+<footer class="sec" style="--prev:#ffdcec"><div class="in">
+<h2>💚 Fertilízate</h2><p>Proyecto académico open source · Licencia MIT</p>
+<a class="btn" style="--c:#9b5de5" href="documentacion.html">📘 Documentación completa</a><a class="btn" style="--c:#ff7a2f" id="gh2" href="#">🐙 Repositorio</a><a class="btn" style="--c:#1ea7d6" href="#inicio">⬆ Arriba</a>
+</div></footer>
 
 <script>
-(async function () {
-  const esPages = location.hostname.endsWith("github.io");
-  const usuario = esPages ? location.hostname.split(".")[0] : null;
-  const repo = esPages ? location.pathname.split("/")[1] : null;
-  const base = esPages ? `https://github.com/${usuario}/${repo}` : null;
-  const RAMA = "main";
-
-  const btn = document.getElementById("btn-repo");
-  if (base) btn.href = base; else btn.style.display = "none";
-
-  const estado = document.getElementById("estado");
-  const cont = document.getElementById("contenido");
-
-  try {
-    const res = await fetch("README.md", { cache: "no-cache" });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const md = await res.text();
-    cont.innerHTML = marked.parse(md, { gfm: true });
-  } catch (e) {
-    estado.textContent = "No se pudo cargar README.md (" + e.message + "). Abre el repositorio en GitHub.";
-    return;
-  }
-
-  // 1) IDs de encabezados con el mismo esquema de anclas que GitHub
-  const usados = {};
-  cont.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(h => {
-    let slug = h.textContent.toLowerCase()
-      .replace(/[^\p{L}\p{M}\p{N}\s_-]/gu, "")   // igual que GitHub: conserva marcas (p. ej. U+FE0F de algunos emojis)
-      .replace(/\s/g, "-");
-    if (usados[slug] !== undefined) { usados[slug]++; slug += "-" + usados[slug]; }
-    else usados[slug] = 0;
-    h.id = slug;
-  });
-
-  // 2) Alertas de GitHub: > [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION]
-  const titulos = { NOTE: "ℹ️ Nota", TIP: "💡 Consejo", IMPORTANT: "❗ Importante", WARNING: "⚠️ Advertencia", CAUTION: "🛑 Precaución" };
-  cont.querySelectorAll("blockquote").forEach(bq => {
-    const p = bq.firstElementChild;
-    if (!p) return;
-    const m = p.innerHTML.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?\s*/i);
-    if (!m) return;
-    const tipo = m[1].toUpperCase();
-    p.innerHTML = p.innerHTML.slice(m[0].length);
-    bq.classList.add("alerta", "a-" + tipo.toLowerCase());
-    const t = document.createElement("p");
-    t.className = "t"; t.textContent = titulos[tipo];
-    bq.insertBefore(t, bq.firstChild);
-  });
-
-  // 3) Mermaid
-  cont.querySelectorAll("code.language-mermaid").forEach(code => {
-    const pre = document.createElement("pre");
-    pre.className = "mermaid";
-    pre.textContent = code.textContent;
-    code.parentElement.replaceWith(pre);
-  });
-
-  // 4) Tablas con scroll horizontal
-  cont.querySelectorAll("table").forEach(t => {
-    const w = document.createElement("div"); w.className = "tabla";
-    t.parentNode.insertBefore(w, t); w.appendChild(t);
-  });
-
-  // 5) Enlaces relativos -> repositorio en GitHub; externos en pestaña nueva
-  cont.querySelectorAll("a[href]").forEach(a => {
-    const h = a.getAttribute("href");
-    if (h.startsWith("#")) return;
-    if (/^https?:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; return; }
-    if (base) {
-      const ruta = h.replace(/^\.\//, "");
-      const ultimo = ruta.split("/").pop();
-      const tipo = ultimo.includes(".") ? "blob" : "tree";
-      a.href = `${base}/${tipo}/${RAMA}/${ruta}`;
-      a.target = "_blank"; a.rel = "noopener";
-    }
-  });
-
-  estado.remove();
-  cont.hidden = false;
-
-  const oscuro = matchMedia("(prefers-color-scheme: dark)").matches;
-  mermaid.initialize({ startOnLoad: false, theme: oscuro ? "dark" : "default", securityLevel: "strict" });
-  try { await mermaid.run({ querySelector: "pre.mermaid" }); }
-  catch (e) { console.error("Mermaid:", e); }
-
-  if (location.hash) {
-    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (el) el.scrollIntoView();
-  }
-})();
+const $=s=>document.querySelector(s),R=a=>a[Math.floor(Math.random()*a.length)];
+const boom=()=>{for(let i=0;i<16;i++){const s=document.createElement('span');s.textContent=R(['🌱','🌿','🍃','🌻','✨','🍀']);s.className='cf';s.style.cssText=`left:${5+Math.random()*90}vw;--r:${Math.random()*720-360}deg;--d:${1.2+Math.random()}s;font-size:${1.3+Math.random()*1.4}rem`;document.body.appendChild(s);setTimeout(()=>s.remove(),2600)}};
+// GitHub
+if(location.hostname.endsWith('github.io')){const u='https://github.com/'+location.hostname.split('.')[0]+'/'+location.pathname.split('/')[1];$('#gh').href=$('#gh2').href=u}else{$('#gh').hidden=$('#gh2').hidden=true}
+// emojis flotantes
+['🍎','🥬','🍂','🌱','🍌','🥕','🌻','🍃'].forEach((e,i)=>{const s=document.createElement('span');s.className='fl';s.textContent=e;s.style.cssText=`left:${6+i*12.5}%;top:${(i%2?62:8)+Math.random()*14}%;animation-delay:${i*.6}s`;$('.hero').appendChild(s)});
+// tarjetas
+[['🤢','Malos olores','#e0a800','Sin oxígeno la materia se pudre y huele mal. Con aireación huele a tierra.'],['💧','Lixiviados','#1ea7d6','Líquidos contaminantes que pueden filtrarse al suelo y al agua.'],['🌫️','Gases de efecto invernadero','#9b5de5','Sin aire se produce metano (CH₄). Compostar con oxígeno ayuda a evitarlo.'],['♻️','Recurso perdido','#2e9e4f','Esos restos tienen nutrientes que podrían volver al suelo como abono.']].forEach(([e,t,c,b])=>{const d=document.createElement('div');d.className='flip';d.style.setProperty('--c',c);d.innerHTML=`<div><div class="f"><b>${e}</b>${t}<small>toca para voltear</small></div><div class="bk">${b}</div></div>`;d.onclick=()=>d.classList.toggle('on');$('#flips').appendChild(d)});
+// pasos
+const P=[['🪣','Carga','🧑 Tú','#2e9e4f','Pones frutas, verduras y hojas en la tolva y cierras la tapa. ¡Seguridad primero!'],['⚙️','Triturado','🤖 Máquina','#e0a800','Las cuchillas reducen el tamaño: más superficie, descomposición más rápida.'],['🌀','Mezcla','🤖 Máquina','#ff7a2f','Se mezcla con material seco (hojas) para equilibrar humedad y nutrientes.'],['🌡️','Monitoreo','🤖 + 🧑','#e0409c','Sensores miden temperatura y humedad. Si falta agua o material seco, la pantalla te avisa.'],['💨','Aireación','🤖 Máquina','#9b5de5','Volteos programados llevan oxígeno: menos olores y menos metano.'],['📦','Descarga y curado','🧑 Tú','#1ea7d6','Retiras el material y lo dejas madurar. Revisa color, olor, textura… ¡y prueba de germinación!']];
+let si=0,tm=null;
+P.forEach((p,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+p[1];b.style.setProperty('--c',p[3]);b.onclick=()=>{stop();go(i)};$('#steps').appendChild(b)});
+function go(i){si=i;const p=P[i];[...$('#steps').children].forEach((b,j)=>b.classList.toggle('on',j==i));$('#panel').style.setProperty('--c',p[3]);$('#panel').innerHTML=`<div class="em">${p[0]}</div><div style="flex:1;min-width:220px"><span class="tag" style="--c:${p[3]}">${p[2]}</span><h3>${p[1]}</h3>${p[4]}</div>`;$('#prog').style.width=(i+1)/P.length*100+'%'}
+function stop(){clearInterval(tm);tm=null;$('#play').textContent='▶ Reproducir ciclo'}
+$('#play').onclick=()=>{if(tm)return stop();$('#play').textContent='⏸ Pausar';go(0);tm=setInterval(()=>{if(si>=P.length-1){stop();boom();return}go(si+1)},2600)};go(0);
+// juego
+const I=[['🍌','Cáscara de banano',1,'Residuo de fruta: ideal.'],['🥬','Restos de lechuga',1,'Verdura: aporta humedad y nitrógeno.'],['🍂','Hojas secas',1,'Material seco que equilibra la mezcla.'],['🌿','Pasto cortado',1,'Material verde, entra bien.'],['🍖','Carne',0,'Atrae plagas y huele muy mal.'],['🧀','Queso y lácteos',0,'Se pudren con mal olor y atraen moscas.'],['🛢️','Aceite de cocina',0,'Frena la descomposición y contamina.'],['🐕','Excremento de mascota',0,'Puede tener patógenos: no entra.'],['🦴','Huesos',0,'No se trituran ni descomponen bien.'],['🥕','Cáscaras de zanahoria',1,'Verdura: perfecta.']];
+let q=[],gi=0,sc=0,st=0,ans=false;
+function gnew(){q=[...I].sort(()=>Math.random()-.5);gi=sc=st=0;gshow()}
+function gshow(){ans=false;if(gi>=q.length){$('#gi').textContent=sc>=8?'🏆':'💪';$('#gn').textContent=`Puntaje: ${sc}/${q.length}`;$('#gf').textContent=sc>=8?'¡Experto en compostaje!':'¡Casi! Intenta otra vez.';$('#nx').textContent='🔁 Jugar de nuevo';$('#nx').hidden=false;gi=-1;return}
+$('#gi').textContent=q[gi][0];$('#gn').textContent=q[gi][1];$('#gf').textContent='¿Entra a la máquina?';$('#nx').hidden=true;$('#nx').textContent='Siguiente ➜';$('#gs').textContent=`Aciertos: ${sc} · Racha: ${st}`}
+function gans(v){if(ans||gi<0)return;ans=true;const it=q[gi],ok=!!it[2]==v;ok?(sc++,st++,boom()):st=0;$('#gf').textContent=(ok?'🎉 ¡Correcto! ':'😅 Ups. ')+it[3];$('#gs').textContent=`Aciertos: ${sc} · Racha: ${st}`;$('#nx').hidden=false;gi++}
+$('#yes').onclick=()=>gans(true);$('#no').onclick=()=>gans(false);$('#nx').onclick=()=>{if(gi===-1)gnew();else gshow()};gnew();
+// humedad
+const H=[[50,'🏜️','Muy seca','Agrega agua 💧: sin humedad los microorganismos se frenan.'],[61,'🌱','¡Óptima!','Buen equilibrio de agua y aire.'],[101,'🌊','Muy húmeda','Agrega material seco 🍂: el exceso de agua causa mal olor.']];
+function hum(){const v=+$('#hr').value,h=H.find(x=>x[0]>v);$('#he').textContent=h[1];$('#hv').textContent=v+' %';$('#ht').textContent=h[2];$('#hd').textContent=h[3];$('#hg').style.left=`calc(${v}% - 4px)`}
+$('#hr').oninput=hum;hum();
+// calculadora
+function an(el,to){const f=+el.dataset.v||0,t0=performance.now();el.dataset.v=to;(function s(t){const k=Math.min(1,(t-t0)/500);el.textContent=Math.round(f+(to-f)*k).toLocaleString('es-CO');if(k<1)requestAnimationFrame(s)})(t0)}
+function calc(){const a=+$('#k1').value,r=+$('#k2').value,n=+$('#k3').value,p=+$('#k4').value;$('#v1').textContent=a;$('#v2').textContent=r;$('#v3').textContent=n;const d=a*52*n,ab=d*r/100;an($('#o1'),d);an($('#o2'),ab);if(p>0)an($('#o3'),ab*p);else{$('#o3').textContent='—';$('#o3').dataset.v=0}}
+['#k1','#k2','#k3','#k4'].forEach(s=>$(s).oninput=calc);calc();
+// quiz
+const Q=[['¿Qué gas potente producen los vertederos al descomponer residuos sin oxígeno?',['Helio','Metano (CH₄)','Neón'],1,'El metano es un gas de efecto invernadero.'],['¿Para qué sirve triturar los residuos?',['Para que pesen más','Para aumentar la superficie y acelerar la descomposición','Para que huelan más'],1,'Más superficie de contacto = proceso más rápido.'],['Si la mezcla está demasiado húmeda, ¿qué agregas?',['Material seco, como hojas','Más agua','Restos de carne'],0,'El material seco absorbe el exceso y aporta aire.'],['En una máquina semiautomática, ¿qué hace la persona?',['Todo el proceso','Cargar, supervisar y corregir humedad','Nada'],1,'La máquina tritura, mezcla, airea y mide.'],['¿Qué prueba casera ayuda a ver si el abono ya maduró?',['Germinar semillas','Ver si brilla','Escuchar su sonido'],0,'Si las semillas germinan bien, el abono es estable.']];
+let qi=0,qs=0;
+function qshow(){const x=Q[qi];$('#qq').textContent=`${qi+1}/${Q.length} · ${x[0]}`;$('#qo').innerHTML='';$('#qf').textContent='';$('#qn').hidden=true;x[1].forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{if($('#qn').hidden===false)return;const ok=i===x[2];b.classList.add(ok?'ok':'no');if(!ok)$('#qo').children[x[2]].classList.add('ok');else{qs++;boom()}$('#qf').textContent=(ok?'🎉 ¡Correcto! ':'🤔 No exactamente. ')+x[3];$('#qn').textContent=qi==Q.length-1?'Ver resultado':'Siguiente ➜';$('#qn').hidden=false};$('#qo').appendChild(b)})}
+$('#qn').onclick=()=>{if(qi>=Q.length-1&&$('#qn').textContent==='Ver resultado'){$('#qq').textContent=`🏁 Resultado: ${qs}/${Q.length}`;$('#qo').innerHTML='';$('#qf').textContent=qs>=4?'¡Eres un/a experto/a en Fertilízate! 🌻':'Buen intento: repasa el proceso e inténtalo otra vez.';$('#qn').textContent='🔁 Reintentar';qi=-1;return}if(qi===-1){qi=0;qs=0}else qi++;qshow()};qshow();
+// checklist
+const C=['Leer la sección de seguridad','Reunir herramientas y materiales (BOM)','Armar la estructura y el tambor','Montar la electrónica y el paro de emergencia','Cargar el firmware y calibrar sensores','Hacer pruebas en vacío y con poca carga','Ejecutar el primer ciclo completo','Curar el abono y hacer la prueba de germinación'];
+let ck=[];try{ck=JSON.parse(localStorage.getItem('fz')||'[]')}catch(e){}
+C.forEach((t,i)=>{const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=!!ck[i];l.append(c,' '+t);c.onchange=()=>{ck[i]=c.checked;try{localStorage.setItem('fz',JSON.stringify(ck))}catch(e){}up(true)};$('#chk').appendChild(l)});
+function up(f){const l=[...$('#chk').children],n=l.filter(x=>x.firstChild.checked).length;l.forEach(x=>x.classList.toggle('d',x.firstChild.checked));$('#cp').style.width=n/C.length*100+'%';$('#ct').textContent=`${n}/${C.length} pasos`;if(f&&n==C.length)boom()}up();
+['🍽️','🤖','🌱','🌻','🥕'].forEach((e,i)=>{const s=document.createElement('span');s.textContent=e+(i<4?'➜':'');s.style.animationDelay=i*.3+'s';$('#loop').appendChild(s)});
+// aparecer al hacer scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 </script>
-</body>
-</html>
+</body></html>

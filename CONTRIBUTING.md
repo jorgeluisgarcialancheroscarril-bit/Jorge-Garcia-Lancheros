@@ -1,4 +1,4 @@
-# 🤝 Guía para contribuir a EcoAbono
+# 🤝 Guía para contribuir a Fertilízate
 
 ¡Gracias por querer mejorar el proyecto! 🌱
 

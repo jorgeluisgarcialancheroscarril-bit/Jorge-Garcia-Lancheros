@@ -24,6 +24,7 @@ jobs:
         run: |
           mkdir -p _site
           cp docs/index.html _site/index.html
+          cp docs/documentacion.html _site/documentacion.html
           cp README.md _site/README.md
           if [ -d docs/imagenes ]; then mkdir -p _site/docs && cp -r docs/imagenes _site/docs/imagenes; fi
           touch _site/.nojekyll

@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "Si usas este proyecto, por favor cítalo."
-title: "EcoAbono: máquina semiautomática de bajo costo para transformar residuos orgánicos en fertilizante natural"
+title: "Fertilízate: máquina semiautomática de bajo costo para transformar residuos orgánicos en fertilizante natural"
 type: software
 authors:
   - family-names: "APELLIDO"
     given-names: "NOMBRE"
 license: MIT
-repository-code: "https://github.com/TU-USUARIO/ecoabono"
+repository-code: "https://github.com/TU-USUARIO/fertilizate"
 date-released: "2026-01-01"
 keywords:
   - compostaje
