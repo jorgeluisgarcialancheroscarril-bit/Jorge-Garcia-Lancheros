@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    name: Scripts de Python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Comprobar sintaxis
+        run: python -m py_compile scripts/*.py simulacion/modelo_proceso/simulacion_basica.py
+      - name: Ejecutar con datos de ejemplo
+        run: |
+          python scripts/punto_equilibrio.py --inversion 300000 --kg-mes 20 --precio-kg 4000 --costo-mes 5000
+          python simulacion/modelo_proceso/simulacion_basica.py --masa 5 --tasa 0.04 --dias 30
+
+  firmware:
+    name: Compilar firmware (Arduino UNO)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: arduino:avr:uno
+          sketch-paths: |
+            - firmware/ecoabono
+            - firmware/pruebas/test_lcd
+            - firmware/pruebas/test_sensores
+            - firmware/pruebas/test_reles
+            - firmware/pruebas/test_seguridad
+          libraries: |
+            - name: LiquidCrystal I2C
+            - name: OneWire
+            - name: DallasTemperature

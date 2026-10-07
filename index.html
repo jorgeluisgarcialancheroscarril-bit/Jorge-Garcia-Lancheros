@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EcoAbono · Máquina semiautomática de compostaje</title>
+<meta name="description" content="Máquina semiautomática de bajo costo para transformar residuos orgánicos en fertilizante natural. Proyecto académico open source.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+<style>
+  :root{
+    --bg:#f6faf6; --card:#ffffff; --txt:#1c2a1f; --muted:#5b6b5e; --line:#d9e5da;
+    --accent:#2e7d32; --accent-soft:#e8f5e9; --code:#f1f5f1;
+    --note:#0969da; --tip:#1a7f37; --imp:#8250df; --warn:#9a6700; --caut:#cf222e;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1712; --card:#16211a; --txt:#e3ece5; --muted:#9db0a1; --line:#2a3b2f;
+      --accent:#66bb6a; --accent-soft:#1b2b1f; --code:#1d2b21;
+      --note:#58a6ff; --tip:#3fb950; --imp:#a371f7; --warn:#d29922; --caut:#f85149;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{margin:0;background:var(--bg);color:var(--txt);
+       font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+       padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  header.top{position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center;justify-content:space-between;
+       padding:10px 18px;background:var(--card);border-bottom:1px solid var(--line)}
+  header.top strong{font-size:1.05rem}
+  header.top a{color:var(--accent);text-decoration:none;font-weight:600;border:1px solid var(--accent);
+       padding:5px 12px;border-radius:999px;font-size:.9rem;white-space:nowrap}
+  header.top a:hover{background:var(--accent-soft)}
+  main{max-width:980px;margin:24px auto;padding:0 16px}
+  #contenido{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 30px;overflow-wrap:anywhere}
+  #estado{color:var(--muted);text-align:center;padding:40px 0}
+  h1,h2,h3,h4{line-height:1.25}
+  h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+  a{color:var(--accent)}
+  img{max-width:100%}
+  hr{border:0;border-top:1px solid var(--line);margin:2em 0}
+  code{background:var(--code);padding:.15em .4em;border-radius:5px;font-size:.9em}
+  pre{background:var(--code);padding:14px 16px;border-radius:10px;overflow-x:auto}
+  pre code{background:none;padding:0}
+  pre.mermaid{background:transparent;text-align:center;overflow-x:auto}
+  .tabla{overflow-x:auto;margin:1em 0}
+  table{border-collapse:collapse;width:100%;font-size:.93rem}
+  th,td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top}
+  th{background:var(--accent-soft)}
+  tr:nth-child(even) td{background:color-mix(in srgb,var(--accent-soft) 35%,transparent)}
+  details{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:1em 0;background:var(--bg)}
+  details[open]{background:transparent}
+  summary{cursor:pointer;font-weight:600}
+  blockquote{margin:1em 0;padding:.4em 1em;border-left:4px solid var(--line);color:var(--muted)}
+  blockquote.alerta{color:var(--txt);border-left-color:var(--c);background:color-mix(in srgb,var(--c) 8%,transparent);border-radius:0 8px 8px 0}
+  blockquote.alerta .t{font-weight:700;color:var(--c);margin:0 0 .2em}
+  .a-note{--c:var(--note)} .a-tip{--c:var(--tip)} .a-important{--c:var(--imp)}
+  .a-warning{--c:var(--warn)} .a-caution{--c:var(--caut)}
+  input[type=checkbox]{margin-right:.4em}
+  footer{max-width:980px;margin:0 auto 40px;padding:0 16px;color:var(--muted);font-size:.85rem;text-align:center}
+  @media (max-width:600px){#contenido{padding:18px 14px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <strong>🌱 EcoAbono</strong>
+  <a id="btn-repo" href="#" rel="noopener">Ver repositorio en GitHub ↗</a>
+</header>
+<main>
+  <div id="estado">Cargando documentación…</div>
+  <article id="contenido" hidden></article>
+</main>
+<footer>Página generada automáticamente desde el <code>README.md</code> del repositorio · Licencia MIT</footer>
+
+<script>
+(async function () {
+  const esPages = location.hostname.endsWith("github.io");
+  const usuario = esPages ? location.hostname.split(".")[0] : null;
+  const repo = esPages ? location.pathname.split("/")[1] : null;
+  const base = esPages ? `https://github.com/${usuario}/${repo}` : null;
+  const RAMA = "main";
+
+  const btn = document.getElementById("btn-repo");
+  if (base) btn.href = base; else btn.style.display = "none";
+
+  const estado = document.getElementById("estado");
+  const cont = document.getElementById("contenido");
+
+  try {
+    const res = await fetch("README.md", { cache: "no-cache" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const md = await res.text();
+    cont.innerHTML = marked.parse(md, { gfm: true });
+  } catch (e) {
+    estado.textContent = "No se pudo cargar README.md (" + e.message + "). Abre el repositorio en GitHub.";
+    return;
+  }
+
+  // 1) IDs de encabezados con el mismo esquema de anclas que GitHub
+  const usados = {};
+  cont.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(h => {
+    let slug = h.textContent.toLowerCase()
+      .replace(/[^\p{L}\p{M}\p{N}\s_-]/gu, "")   // igual que GitHub: conserva marcas (p. ej. U+FE0F de algunos emojis)
+      .replace(/\s/g, "-");
+    if (usados[slug] !== undefined) { usados[slug]++; slug += "-" + usados[slug]; }
+    else usados[slug] = 0;
+    h.id = slug;
+  });
+
+  // 2) Alertas de GitHub: > [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION]
+  const titulos = { NOTE: "ℹ️ Nota", TIP: "💡 Consejo", IMPORTANT: "❗ Importante", WARNING: "⚠️ Advertencia", CAUTION: "🛑 Precaución" };
+  cont.querySelectorAll("blockquote").forEach(bq => {
+    const p = bq.firstElementChild;
+    if (!p) return;
+    const m = p.innerHTML.match(/^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?\s*/i);
+    if (!m) return;
+    const tipo = m[1].toUpperCase();
+    p.innerHTML = p.innerHTML.slice(m[0].length);
+    bq.classList.add("alerta", "a-" + tipo.toLowerCase());
+    const t = document.createElement("p");
+    t.className = "t"; t.textContent = titulos[tipo];
+    bq.insertBefore(t, bq.firstChild);
+  });
+
+  // 3) Mermaid
+  cont.querySelectorAll("code.language-mermaid").forEach(code => {
+    const pre = document.createElement("pre");
+    pre.className = "mermaid";
+    pre.textContent = code.textContent;
+    code.parentElement.replaceWith(pre);
+  });
+
+  // 4) Tablas con scroll horizontal
+  cont.querySelectorAll("table").forEach(t => {
+    const w = document.createElement("div"); w.className = "tabla";
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+  });
+
+  // 5) Enlaces relativos -> repositorio en GitHub; externos en pestaña nueva
+  cont.querySelectorAll("a[href]").forEach(a => {
+    const h = a.getAttribute("href");
+    if (h.startsWith("#")) return;
+    if (/^https?:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; return; }
+    if (base) {
+      const ruta = h.replace(/^\.\//, "");
+      const ultimo = ruta.split("/").pop();
+      const tipo = ultimo.includes(".") ? "blob" : "tree";
+      a.href = `${base}/${tipo}/${RAMA}/${ruta}`;
+      a.target = "_blank"; a.rel = "noopener";
+    }
+  });
+
+  estado.remove();
+  cont.hidden = false;
+
+  const oscuro = matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: false, theme: oscuro ? "dark" : "default", securityLevel: "strict" });
+  try { await mermaid.run({ querySelector: "pre.mermaid" }); }
+  catch (e) { console.error("Mermaid:", e); }
+
+  if (location.hash) {
+    const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el) el.scrollIntoView();
+  }
+})();
+</script>
+</body>
+</html>
